@@ -60,10 +60,22 @@ if [[ $NEW_INSTALL ]]; then
   fi
 fi
 
+DOMAIN=$(docker-compose ps php | grep php | sed 's/_.*//').ddl
+HOSTS_ENTRY="127.0.0.1 $DOMAIN"
+
+if ! grep -q -F "$HOSTS_ENTRY" /etc/hosts; then
+  if [ -w /etc/hosts ]; then
+    echo "$HOSTS_ENTRY" >> /etc/hosts
+  else
+    echo "Adding entry to hosts file, I'll need sudo for this"
+    echo "$HOSTS_ENTRY" | sudo tee -a /etc/hosts > /dev/null
+  fi
+fi
+
 if [[ $NEW_INSTALL ]]; then
   URL=$(./drush uli | tr -d '\r')
 else
-  URL=http://$(docker-compose port php 80 | sed 's/0.0.0.0/localhost/')
+  URL=http://$(docker-compose port php 80 | sed "s/0.0.0.0/$DOMAIN/")
 fi
 
 if type "open" &> /dev/null; then
