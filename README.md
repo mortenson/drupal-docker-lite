@@ -31,6 +31,7 @@ site, or if your Docker containers are down.
 - `./rebuild.sh` will force the Docker images to re-build, and re-start your
 containers.
 - `./stop.sh` will stop any running containers without removing them.
+- `./mail.sh` will open the Mailhog user interface.
 
 # Drush support
 

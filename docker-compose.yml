@@ -9,6 +9,10 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - db:/var/lib/mysql:delegated
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - '0:8025'
   php:
     build: ./php
     ports:
@@ -17,5 +21,6 @@ services:
       - ./code:/var/www/html:cached
     depends_on:
       - mysql
+      - mailhog
 volumes:
   db:
