@@ -16,8 +16,8 @@ Docker for Mac.
 
 # Installation
 
-1. `git clone git@github.com:mortenson/drupal-docker-lite.git`
-1. `cd drupal-docker-lite`
+1. `git clone git@github.com:mortenson/drupal-docker-lite.git your-project`
+1. `cd your-project`
 1. `./start.sh`
 
 That's it!
