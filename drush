@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if ! type "docker-compose" &> /dev/null; then
+  echo "Please install Docker and try running the script again"
+  exit 1
+fi
+
+URL=$(docker-compose port php 80 | sed 's/0.0.0.0/localhost/')
+
+docker-compose exec php drush --root="/var/www/html/docroot" -l $URL $@

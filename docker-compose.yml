@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mysql:
+    build: ./mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: password
+    volumes:
+      - db:/var/lib/mysql:delegated
+  php:
+    build: ./php
+    ports:
+      - '0:80'
+    volumes:
+      - ./code:/var/www/html:cached
+    depends_on:
+      - mysql
+volumes:
+  db:
