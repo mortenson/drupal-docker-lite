@@ -44,6 +44,16 @@ commands will be ran within Docker auto-magically.
 For Drush Launcher users, you have to run `./drush` to run Drush commands in
 the container. Sorry! 😩
 
+Also note that the PHP container for this project uses Drush Launcher, so your
+project will need to include Drush locally. This is common for all recent
+[Drupal Project](https://github.com/drupal-composer/drupal-project) based
+projects.
+
+# Multiple instances
+
+Since this project just uses stock docker-compose, you should be able to clone
+it into multiple directories and spin up/down instances without any issues.
+
 # Alternatives
 
 There are loads of good Drupal Docker projects out there. Here are some I'm
