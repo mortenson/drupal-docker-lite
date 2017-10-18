@@ -5,7 +5,6 @@ if ! type "docker-compose" &> /dev/null; then
   exit 1
 fi
 
-DOMAIN=$(docker-compose ps php | grep php | sed 's/_.*//').ddl
-URL=http://$(docker-compose port php 80 | sed "s/0.0.0.0/$DOMAIN/")
+URL=$(./url.sh)
 
 docker-compose exec php drush --root="/var/www/html/docroot" -l $URL $@

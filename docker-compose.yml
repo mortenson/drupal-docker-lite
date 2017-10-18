@@ -9,12 +9,24 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - db:/var/lib/mysql:delegated
+    networks:
+      - internal
   mailhog:
     image: mailhog/mailhog
     ports:
       - '0:8025'
+    networks:
+      - internal
   php:
     build: ./php
+    environment:
+      - VIRTUAL_HOST=${VIRTUAL_HOST-localhost}
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.backend=DDL-${VIRTUAL_HOST-localhost}'
+      - 'traefik.frontend.rule=Host:${VIRTUAL_HOST-localhost}'
+      - 'traefik.docker.network=ddl_proxy'
+      - 'traefik.port=80'
     ports:
       - '0:80'
     volumes:
@@ -22,5 +34,13 @@ services:
     depends_on:
       - mysql
       - mailhog
+    networks:
+      - internal
+      - ddl_proxy
 volumes:
   db:
+networks:
+  ddl_proxy:
+    external: true
+  internal:
+    external: false
