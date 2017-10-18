@@ -70,6 +70,10 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+if [ ! $(docker ps -a -q --filter name=ddl_proxy) ]; then
+  ./proxy.sh &>/dev/null
+fi
+
 if [[ $NEW_INSTALL ]]; then
   echo "Please enter a profile name to install. i.e. standard or lightning"
   read -p "Profile: " PROFILE
