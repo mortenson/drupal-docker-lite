@@ -1,8 +1,9 @@
 FROM php:7.1-apache
 # Customize container to match Drupal 8 requirements
 RUN a2enmod rewrite
-RUN apt-get update -y && apt-get install -y libpng-dev zip unzip mysql-client ssmtp mailutils
-RUN docker-php-ext-install gd opcache pdo pdo_mysql zip bcmath
+RUN apt-get update -y && apt-get install -y libpng-dev zip unzip mysql-client ssmtp mailutils libfreetype6-dev
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/
+RUN docker-php-ext-install gd opcache pdo pdo_mysql zip bcmath exif
 # Configure sendmail
 RUN echo "hostname=localhost.localdomain" > /etc/ssmtp/ssmtp.conf
 RUN echo "mailhub=mailhog:1025" >> /etc/ssmtp/ssmtp.conf
