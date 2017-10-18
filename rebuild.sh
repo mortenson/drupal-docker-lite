@@ -8,7 +8,6 @@ if [ $? -ne 0 ]; then
 fi
 
 docker-compose down
-docker-compose rm
 ./start.sh
 
 if [ $? -ne 0 ]; then
