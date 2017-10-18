@@ -21,7 +21,7 @@ fi
 DOCKER_VERSION=$(docker -v | sed 's/Docker version //')
 DOCKER_VERSION=(${DOCKER_VERSION//./ })
 
-if [ ${DOCKER_VERSION[0]} -lt 17 ] || ( [ ${DOCKER_VERSION[0]} -eq 17 ] && [ ${DOCKER_VERSION[1]} -lt 6 ] ); then
+if [ ${DOCKER_VERSION[0]} -lt 17 ] || ( [ ${DOCKER_VERSION[0]} -eq 17 ] && [ ${DOCKER_VERSION[1]} -lt 5 ] ); then
   echo "Please upgrade Docker to version 17.05 or later and try running the script again"
   exit 1
 fi
