@@ -26,6 +26,19 @@ if [ ${DOCKER_VERSION[0]} -lt 17 ] || ( [ ${DOCKER_VERSION[0]} -eq 17 ] && [ ${D
   exit 1
 fi
 
+if [ ! -f ".env" ]; then
+  echo "Please enter the domain name you would like to use for this container, i.e. drupal.ddl"
+  read -p "Domain name: " DOMAIN
+  PREFIX=$(echo $DOMAIN | sed 's/[^a-zA-Z0-9]//g')
+  if [[ $(docker ps -q -a --filter name="$PREFIX"_) ]]; then
+    echo "A Docker instance using this domain already exists:"
+    docker ps -a --filter name="$PREFIX"_
+    echo "Please stop/remove the containers above then run ./start.sh again"
+    exit 1
+  fi
+  printf "VIRTUAL_HOST=$DOMAIN\nCOMPOSE_PROJECT_NAME=$DOMAIN" > .env
+fi
+
 if [ ! -d "code" ]; then
   echo "Please enter the name of your Composer project. i.e. drupal-composer/drupal-project or acquia/lightning-project"
   read -p "Project: " PROJECT
@@ -41,12 +54,6 @@ fi
 
 if [ ! -d "code/docroot" ] && [ -d "code/web" ]; then
   ln -s web code/docroot
-fi
-
-if [ ! -f ".env" ]; then
-  echo "Please enter the domain name you would like to use for this container, i.e. drupal.ddl"
-  read -p "Domain name: " DOMAIN
-  echo "VIRTUAL_HOST=$DOMAIN" > .env
 fi
 
 docker network create ddl_proxy &> /dev/null
