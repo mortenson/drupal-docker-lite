@@ -31,11 +31,18 @@ site, or if your Docker containers are down.
 containers.
 - `./stop.sh` will stop any running containers without removing them.
 - `./mail.sh` will open the Mailhog user interface.
+- `./proxy.sh` will (re)start a reverse proxy which maps port 80 on the host to
+ your drupal-docker-lite instances. This runs automatically with ./start.sh.
+- `./url.sh` will print the current URL. Useful for automation, as the domain
+ is configurable and port 80 may not be exposed if the proxy is broken.
 
 # Drush support
 
 If you run Drush while in the drupal-docker-lite directory or any sub-directory,
 commands will be ran within Docker auto-magically.
+
+For Drush Launcher users, you have to run `./drush` to run Drush commands in
+the container. Sorry! 😩
 
 # Alternatives
 
