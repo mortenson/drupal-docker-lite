@@ -36,6 +36,18 @@ containers.
 - `./url.sh` will print the current URL. Useful for automation, as the domain
  is configurable and port 80 may not be exposed if the proxy is broken.
 
+# Meta commands
+
+As you may be running multiple instances of drupal-docker-lite, commands are
+provided which perform operations on arbitrary instances.
+
+- `./meta/list.sh` will list all running drupal-docker-lite instances.
+- `./meta/inspect.sh [NAME]` will list all containers for a given instance.
+- `./meta/stop.sh [NAME]` will stop a given instance's containers.
+- `./meta/start.sh [NAME]` will start a given instance's containers.
+- `./meta/remove.sh [NAME]` will stop and remove a given instance's
+containers.
+
 # Drush support
 
 If you run Drush while in the drupal-docker-lite directory or any sub-directory,
