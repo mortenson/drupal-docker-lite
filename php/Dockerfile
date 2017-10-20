@@ -4,6 +4,7 @@ RUN a2enmod rewrite
 RUN apt-get update -y && apt-get install -y libpng-dev zip unzip mysql-client ssmtp mailutils libfreetype6-dev libjpeg62-turbo-dev
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install gd opcache pdo pdo_mysql zip bcmath exif
+RUN pecl install apcu && echo extension=apcu.so > /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
 # Configure sendmail
 RUN echo "hostname=localhost.localdomain" > /etc/ssmtp/ssmtp.conf
 RUN echo "mailhub=mailhog:1025" >> /etc/ssmtp/ssmtp.conf
