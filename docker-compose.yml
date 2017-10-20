@@ -11,12 +11,16 @@ services:
       - db:/var/lib/mysql:delegated
     networks:
       - internal
+    labels:
+      - 'drupaldockerlite=true'
   mailhog:
     image: mailhog/mailhog
     ports:
       - '0:8025'
     networks:
       - internal
+    labels:
+      - 'drupaldockerlite=true'
   php:
     build: ./php
     environment:
@@ -27,6 +31,7 @@ services:
       - 'traefik.frontend.rule=Host:${VIRTUAL_HOST-localhost}'
       - 'traefik.docker.network=ddl_proxy'
       - 'traefik.port=80'
+      - 'drupaldockerlite=true'
     ports:
       - '0:80'
     volumes:
