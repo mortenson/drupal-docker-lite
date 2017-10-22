@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "${0%/*}"
 
 if ! type "composer" &> /dev/null; then
   echo "Please install composer and try running the script again"

@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "${0%/*}"
 
 DOMAIN=$(docker-compose exec php printenv VIRTUAL_HOST | tr -d '\r')
 

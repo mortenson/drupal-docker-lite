@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "${0%/*}"
 
 docker stop $(docker ps -a -q --filter name=ddl_proxy) &> /dev/null
 docker rm $(docker ps -a -q --filter name=ddl_proxy) &> /dev/null

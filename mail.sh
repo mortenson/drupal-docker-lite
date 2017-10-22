@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "${0%/*}"
 
 URL=http://$(docker-compose port mailhog 8025 | sed 's/0.0.0.0/localhost/')
 
