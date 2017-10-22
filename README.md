@@ -45,8 +45,8 @@ provided which perform operations on arbitrary instances.
 - `./meta/inspect.sh [NAME]` will list all containers for a given instance.
 - `./meta/stop.sh [NAME]` will stop a given instance's containers.
 - `./meta/start.sh [NAME]` will start a given instance's containers.
-- `./meta/remove.sh [NAME]` will stop and remove a given instance's
-containers.
+- `./meta/remove.sh [NAME]` will stop and remove a given instance's containers.
+- `./meta/prune.sh` will remove unused Docker volumes and images.
 
 # Drush support
 
