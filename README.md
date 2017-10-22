@@ -12,7 +12,6 @@ If you want a more complicated setup, see [Alternatives](#alternatives).
 1. Docker 17.05 or later. This project has admittedly only been tested with
 Docker for Mac.
 1. Composer
-1. Drush
 
 # Installation
 
@@ -24,6 +23,12 @@ That's it!
 
 Feel free to run `./start.sh` whenever you can't remember the address for your
 site, or if your Docker containers are down.
+
+# Codebase requirements
+
+This setup only supports Drupal 8 sites that have Drush locally required. If
+your codebase meets these requirements but still isn't working, please file
+an issue!
 
 # Other commands
 
