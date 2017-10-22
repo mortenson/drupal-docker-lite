@@ -40,6 +40,8 @@ containers.
  your drupal-docker-lite instances. This runs automatically with ./start.sh.
 - `./url.sh` will print the current URL. Useful for automation, as the domain
  is configurable and port 80 may not be exposed if the proxy is broken.
+- `./logs.sh` will print logs from the PHP container. Pass `--tail [NUMBER]` to
+limit the log output, and `--follow` to watch new log entries.
 
 # Meta commands
 
@@ -54,6 +56,10 @@ provided which perform operations on arbitrary instances.
 - `./meta/remove.sh [NAME]` will stop and remove a given instance's containers.
 - `./meta/prune.sh` will remove unused Docker volumes and images.
 - `./meta/url.sh [NAME]` will print the URL for a given instance.
+- `./meta/logs.sh [NAME]` will print logs for a given instance. Pass
+`--tail [NUMBER]` to limit the log output, `--follow` to watch new log
+entries, and `--since [DATESTRING]` to logs since a date (e.g.
+2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes).
 
 # Drush support
 
