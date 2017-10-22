@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "${0%/*}"
 
 read -p "This will permanently remove unused Docker volumes and images. Are you sure? [y/n] "
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then

@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "${0%/*}"
 
 INSTANCES=$(docker ps -a --filter "label=drupaldockerlite" -q | xargs docker inspect -f '{{index .Config.Labels "com.docker.compose.project"}}'| uniq)
 
@@ -14,8 +15,8 @@ for INSTANCE in $INSTANCES; do
   CONTAINER=$(docker ps -q -a --filter name="$NAME"_php --filter "label=drupaldockerlite")
   RUNNING=$(docker inspect -f {{.State.Running}} $CONTAINER)
   if [[ $RUNNING = "true" ]]; then
-    URL=$(docker container exec $CONTAINER printenv VIRTUAL_HOST | tr -d '\r')
-    PROFILE=$(docker container exec $CONTAINER drush --root="/var/www/html/docroot" ev 'echo drupal_get_profile()')
+    URL=$(./url.sh "$NAME")
+    PROFILE=$(./drush.sh "$NAME" ev 'echo drupal_get_profile()')
     if [ $? -ne 0 ]; then
       PROFILE="n/a";
     fi
