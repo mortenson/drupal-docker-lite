@@ -8,7 +8,7 @@ if [[ ! "$NAME" ]]; then
   exit 1
 fi
 
-read -p "This will completely remove $NAME containers, which could have negative consequences. Are you sure? [y/n] "
+read -p "This will permanently remove $NAME containers and volumes, which could have negative consequences. Are you sure? [y/n] "
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
   exit 1
 fi
@@ -29,3 +29,5 @@ for CONTAINER in $CONTAINERS; do
     echo "Error when removing $CONTAINER"
   fi
 done
+
+docker volume prune --force
