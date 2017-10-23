@@ -8,7 +8,7 @@ if [[ ! "$INSTANCES" ]]; then
   exit 0
 fi
 
-OUTPUT="NAME RUNNING URL PROFILE CPU MEMORY"
+OUTPUT="NAME RUNNING URL PROFILE CPU MEMORY CODEBASE"
 
 for INSTANCE in $INSTANCES; do
   NAME=$INSTANCE
@@ -24,8 +24,9 @@ for INSTANCE in $INSTANCES; do
     URL="n/a"
     PROFILE="n/a"
   fi
-  STATS=$(docker ps -q -a --filter name="$NAME"_php --filter "label=drupaldockerlite" | xargs docker stats -a --no-stream --format '{{.CPUPerc}} {{.MemPerc}}')
-  OUTPUT="${OUTPUT}"$'\n'"$NAME $RUNNING $URL $PROFILE $STATS"
+  CODEBASE=$(docker container inspect --format '{{ range .Mounts }}{{ if eq .Destination "/var/www/html" }}{{ .Source }}{{ end }}{{ end }}' "$CONTAINER")
+  STATS=$(docker stats -a --no-stream --format '{{ .CPUPerc }} {{ .MemPerc }}' "$CONTAINER")
+  OUTPUT="${OUTPUT}"$'\n'"$NAME $RUNNING $URL $PROFILE $STATS $CODEBASE"
 done
 
 echo "$OUTPUT" | column -t -s ' '
