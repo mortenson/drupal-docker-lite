@@ -1,7 +1,7 @@
 version: '3'
 services:
   mysql:
-    build: ./mysql
+    image: mortenson/ddl-db
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_DATABASE: drupal
@@ -22,7 +22,7 @@ services:
     labels:
       - 'drupaldockerlite=true'
   php:
-    build: ./php
+    image: mortenson/ddl-web
     environment:
       - VIRTUAL_HOST=${VIRTUAL_HOST-localhost}
     labels:
