@@ -24,10 +24,8 @@ for INSTANCE in $INSTANCES; do
     URL="n/a"
     PROFILE="n/a"
   fi
-  STATS=$(docker ps -q -a --filter name="$NAME"_ --filter "label=drupaldockerlite" | xargs docker stats -a --no-stream --format '{{.CPUPerc}}\t{{.MemPerc}}')
-  CPU=$(echo "$STATS" | awk '{print $1}' | tr -d '%' | awk '{s+=$1} END {print s}')
-  MEMORY=$(echo "$STATS" | awk '{print $2}' | tr -d '%' | awk '{s+=$1} END {print s}')
-  OUTPUT="${OUTPUT}"$'\n'"$NAME $RUNNING $URL $PROFILE $CPU% $MEMORY%"
+  STATS=$(docker ps -q -a --filter name="$NAME"_php --filter "label=drupaldockerlite" | xargs docker stats -a --no-stream --format '{{.CPUPerc}} {{.MemPerc}}')
+  OUTPUT="${OUTPUT}"$'\n'"$NAME $RUNNING $URL $PROFILE $STATS"
 done
 
 echo "$OUTPUT" | column -t -s ' '
