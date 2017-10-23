@@ -1,5 +1,4 @@
 #!/bin/bash
-cd "${0%/*}"
 
 NAME=$1
 
@@ -9,6 +8,13 @@ if [[ ! "$NAME" ]]; then
 fi
 
 shift
+
+if [[ "$NAME" = "self" ]] && [[ "$PWD" =~ "/code" || -f "docker-compose.yml" ]]; then
+  COMPOSE_PATH=${PWD%/code*}
+  NAME=$(cd "$COMPOSE_PATH" && docker-compose ps -q php | xargs docker inspect -f '{{index .Config.Labels "com.docker.compose.project"}}')
+fi
+
+cd "${0%/*}"
 
 CONTAINER=$(docker ps -q -a --filter name="$NAME"_php --filter "label=drupaldockerlite")
 

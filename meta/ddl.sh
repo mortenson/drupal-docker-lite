@@ -1,7 +1,7 @@
 #!/bin/bash
 
 FILEPATH=$(readlink $0 || echo $0)
-cd "${FILEPATH%/*}"
+BASEPATH=${FILEPATH%/*}
 
 COMMAND=$1
 
@@ -21,6 +21,6 @@ fi
 
 shift
 
-if [ -f "$COMMAND.sh" ]; then
-  ./"$COMMAND.sh" "$@"
+if [ -f "$BASEPATH/$COMMAND.sh" ]; then
+  "$BASEPATH/$COMMAND.sh" "$@"
 fi
