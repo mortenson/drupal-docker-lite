@@ -61,6 +61,20 @@ provided which perform operations on arbitrary instances.
 entries, and `--since [DATESTRING]` to logs since a date (e.g.
 2013-01-02T13:23:37) or relative (e.g. 42m for 42 minutes).
 
+## Making meta commands globally available
+
+If you have a lot of local instances, you may want to run meta commands from
+any directory. To do this, symlink `meta/ddl.sh` to your local bin folder.
+
+For example:
+
+```
+git clone git@github.com:mortenson/drupal-docker-lite.git ~/drupal-docker-lite
+ln -s ~/drupal-docker-lite/meta/ddl.sh /usr/local/bin/ddl
+```
+
+Now a `ddl` command should be available to you. Run `ddl help` to get started.
+
 # Drush support
 
 If you run Drush while in the drupal-docker-lite directory or any sub-directory,
