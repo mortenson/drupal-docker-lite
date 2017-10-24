@@ -51,7 +51,7 @@ provided which perform operations on arbitrary instances.
 - `./meta/list.sh` will list all running drupal-docker-lite instances.
 - `./meta/inspect.sh [NAME]` will list all containers for a given instance.
 - `./meta/drush.sh [NAME] [COMMAND]` will run drush for a given instance. To
-run commands for the current container, use "self" for the instance name.
+run commands for the current container, omit the instance name.
 - `./meta/stop.sh [NAME]` will stop a given instance's containers.
 - `./meta/start.sh [NAME]` will start a given instance's containers.
 - `./meta/remove.sh [NAME]` will stop and remove a given instance's containers.
