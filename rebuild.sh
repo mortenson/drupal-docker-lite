@@ -1,6 +1,7 @@
 #!/bin/bash
 cd "${0%/*}"
 
+docker-compose pull
 docker-compose build --pull
 
 if [ $? -ne 0 ]; then
