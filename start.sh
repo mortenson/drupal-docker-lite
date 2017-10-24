@@ -13,12 +13,6 @@ if ! type "docker-compose" &> /dev/null; then
   exit 1
 fi
 
-if ! type "drush" &> /dev/null; then
-  echo "Please install Drush and try running the script again"
-  echo "Installation instructions can be found at http://docs.drush.org/en/8.x/install"
-  exit 1
-fi
-
 DOCKER_VERSION=$(docker -v | sed 's/Docker version //')
 DOCKER_VERSION=(${DOCKER_VERSION//./ })
 
