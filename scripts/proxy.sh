@@ -4,7 +4,7 @@ cd "${0%/*}"
 docker stop $(docker ps -a -q --filter name=ddl_proxy) &> /dev/null
 docker rm $(docker ps -a -q --filter name=ddl_proxy) &> /dev/null
 
-docker run -d -p 8085:8080 -p 80:80 -v $PWD/traefik.toml:/etc/traefik/traefik.toml\
+docker run -d -p 8085:8080 -p 80:80 -v $PWD/../traefik.toml:/etc/traefik/traefik.toml\
  -v /var/run/docker.sock:/var/run/docker.sock\
  --network ddl_proxy\
  --name ddl_proxy\

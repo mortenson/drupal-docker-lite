@@ -8,4 +8,4 @@ if [[ ! "$NAME" ]]; then
   exit 1
 fi
 
-docker ps -a --filter name="$NAME"_ --filter "label=drupaldockerlite"
+docker ps -a --filter "label=drupaldockerlite" --filter "label=com.docker.compose.project=$NAME"

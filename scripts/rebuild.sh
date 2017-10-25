@@ -1,5 +1,6 @@
 #!/bin/bash
-cd "${0%/*}"
+
+. "${0%/*}/util/init.sh"
 
 docker-compose pull
 docker-compose build --pull

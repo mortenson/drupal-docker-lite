@@ -1,17 +1,6 @@
 #!/bin/bash
-cd "${0%/*}"
 
-if ! type "composer" &> /dev/null; then
-  echo "Please install composer and try running the script again"
-  echo "Installation instructions can be found at https://getcomposer.org/download"
-  exit 1
-fi
-
-if ! type "docker-compose" &> /dev/null; then
-  echo "Please install Docker and try running the script again"
-  echo "Installation instructions can be found at https://www.docker.com/community-edition"
-  exit 1
-fi
+. "${0%/*}/util/init.sh"
 
 DOCKER_VERSION=$(docker -v | sed 's/Docker version //')
 DOCKER_VERSION=(${DOCKER_VERSION//./ })
@@ -73,13 +62,13 @@ if [ $? -ne 0 ]; then
 fi
 
 if [ ! $(docker ps -a -q --filter name=ddl_proxy) ]; then
-  ./proxy.sh &>/dev/null
+  ${0%/*}/proxy.sh &>/dev/null
 fi
 
 if [[ $NEW_INSTALL ]]; then
   echo "Please enter a profile name to install. i.e. standard or lightning"
   read -p "Profile: " PROFILE
-  ./drush --sites-subdir=default site-install --site-name="$PROFILE" $PROFILE -y
+  ${0%/*}/drush --sites-subdir=default site-install --site-name="$PROFILE" $PROFILE -y
   if [ $? -ne 0 ]; then
     echo "Installation failed. Please consult the log and file an issue if appropriate"
     exit 1
@@ -87,9 +76,9 @@ if [[ $NEW_INSTALL ]]; then
 fi
 
 if [[ $NEW_INSTALL ]]; then
-  URL=$(./drush uli | tr -d '\r')
+  URL=$(${0%/*}/drush uli | tr -d '\r')
 else
-  URL=$(./url.sh)
+  URL=$(${0%/*}/url.sh)
 fi
 
 if type "open" &> /dev/null; then

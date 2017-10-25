@@ -1,5 +1,6 @@
 #!/bin/bash
-cd "${0%/*}"
+
+. "${0%/*}/util/init.sh"
 
 URL=http://$(docker-compose port mailhog 8025 | sed 's/0.0.0.0/localhost/')
 
