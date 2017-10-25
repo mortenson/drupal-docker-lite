@@ -26,4 +26,6 @@ shift
 
 if [ -f "$BASEPATH/$COMMAND.sh" ]; then
   "$BASEPATH/$COMMAND.sh" "$@"
+else
+  echo "Command not recognized"
 fi
