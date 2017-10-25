@@ -8,7 +8,8 @@ COMMAND=$1
 if [[ ! "$COMMAND" || $COMMAND = "help" ]]; then
   echo "Commands available (omit NAME to use the local instance):"
   echo " inspect [NAME]           List all containers for a given instance."
-  echo " drush [NAME] [COMMAND]   Run drush for a given instance."
+  echo " drupal [NAME] [COMMAND]  Run Drupal Console for a given instance."
+  echo " drush [NAME] [COMMAND]   Run Drush for a given instance."
   echo " list                     List all running drupal-docker-lite instances."
   echo " logs [NAME] [OPTIONS]    Print logs for a given instance. Run \"docker help logs\" for options."
   echo " mail [NAME]              Open the mailhog interface for a given container."

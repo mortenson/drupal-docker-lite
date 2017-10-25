@@ -37,6 +37,7 @@ Common operations have been abstracted into commands that can be run with
 drupal-docker-lite instance.
 
 - `inspect [NAME]` - List all containers for a given instance.
+- `drupal [NAME] [COMMAND]` - Run Drupal Console for a given instance.
 - `drush [NAME] [COMMAND]` - Run drush for a given instance.
 - `list` - List all running drupal-docker-lite instances.
 - `logs [NAME] [OPTIONS]` - Print logs for a given instance. Run "docker help logs" for options.
