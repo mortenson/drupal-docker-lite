@@ -1,5 +1,6 @@
 #!/bin/bash
-cd "${0%/*}"
+
+. "${0%/*}/util/init.sh"
 
 DOMAIN=$(docker-compose exec php printenv VIRTUAL_HOST | tr -d '\r')
 

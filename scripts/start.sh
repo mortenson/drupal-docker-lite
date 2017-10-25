@@ -1,17 +1,6 @@
 #!/bin/bash
-cd "${0%/*}"
 
-if ! type "composer" &> /dev/null; then
-  echo "Please install composer and try running the script again"
-  echo "Installation instructions can be found at https://getcomposer.org/download"
-  exit 1
-fi
-
-if ! type "docker-compose" &> /dev/null; then
-  echo "Please install Docker and try running the script again"
-  echo "Installation instructions can be found at https://www.docker.com/community-edition"
-  exit 1
-fi
+. "${0%/*}/util/init.sh"
 
 DOCKER_VERSION=$(docker -v | sed 's/Docker version //')
 DOCKER_VERSION=(${DOCKER_VERSION//./ })

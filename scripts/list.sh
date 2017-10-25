@@ -1,7 +1,7 @@
 #!/bin/bash
 cd "${0%/*}"
 
-INSTANCES=$(docker ps -a --filter "label=drupaldockerlite" -q | xargs docker inspect -f '{{index .Config.Labels "com.docker.compose.project"}}'| uniq)
+INSTANCES=$(docker ps -a -q --filter "label=drupaldockerlite" | xargs docker inspect -f '{{index .Config.Labels "com.docker.compose.project"}}'| uniq)
 
 if [[ ! "$INSTANCES" ]]; then
   echo "No drupal-docker-lite instances are running"
@@ -12,7 +12,7 @@ OUTPUT="NAME RUNNING URL PROFILE CPU MEMORY CODEBASE"
 
 for INSTANCE in $INSTANCES; do
   NAME=$INSTANCE
-  CONTAINER=$(docker ps -q -a --filter name="$NAME"_php --filter "label=drupaldockerlite")
+  CONTAINER=$(./util/getcontainer.sh $NAME)
   RUNNING=$(docker inspect -f {{.State.Running}} $CONTAINER)
   if [[ $RUNNING = "true" ]]; then
     URL=$(./url.sh "$NAME")
