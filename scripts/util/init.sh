@@ -18,7 +18,7 @@ if [[ "$PWD" =~ "/code" || -f "docker-compose.yml" ]]; then
   COMPOSE_PATH=${PWD%%/code*}
 fi
 
-cd "${0%/*}"
+cd "$SCRIPT_PATH"
 
 CONTAINER=$(docker ps -a -q --filter "label=drupaldockerlite" --filter "label=com.docker.compose.project=$NAME" --filter "name=php")
 
