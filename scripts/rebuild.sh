@@ -11,7 +11,7 @@ if [ $? -ne 0 ]; then
 fi
 
 docker-compose down
-./start.sh
+${0%/*}/start.sh
 
 if [ $? -ne 0 ]; then
   exit 1
