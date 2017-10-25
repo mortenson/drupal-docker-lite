@@ -15,7 +15,7 @@ if [[ ! "$COMMAND" || $COMMAND = "help" ]]; then
   echo " proxy                    Restarts the reverse proxy."
   echo " prune                    Remove unused Docker volumes and images."
   echo " rebuild [NAME]           Rebuilds a given instance."
-  echo " remove [NAME]            Stop and remove a given instance, permanently."
+  echo " remove [NAME]            Stop and remove a given instance, permanently. NAME is required for safety."
   echo " start [NAME]             Start a given instance."
   echo " stop [NAME]              Stop a given instance."
   echo " url [NAME]               Print the URL for a given instance."
