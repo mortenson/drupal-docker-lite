@@ -8,25 +8,26 @@ if [[ ! "$INSTANCES" ]]; then
   exit 0
 fi
 
-OUTPUT="NAME RUNNING URL PROFILE CPU MEMORY CODEBASE"
+OUTPUT="NAME RUNNING URL CPU MEMORY CODEBASE"
 
 for INSTANCE in $INSTANCES; do
   NAME=$INSTANCE
-  CONTAINER=$(./util/getcontainer.sh $NAME)
+  CONTAINER=$(docker ps -a -q --filter "label=drupaldockerlite" --filter "label=com.docker.compose.project=$NAME" --filter "name=php")
   RUNNING=$(docker inspect -f {{.State.Running}} $CONTAINER)
   if [[ $RUNNING = "true" ]]; then
     URL=$(./url.sh "$NAME")
-    PROFILE=$(./drush.sh "$NAME" ev 'echo drupal_get_profile()')
     if [ $? -ne 0 ]; then
-      PROFILE="n/a";
+      URL="n/a"
     fi
   else
     URL="n/a"
-    PROFILE="n/a"
   fi
   CODEBASE=$(docker container inspect --format '{{ range .Mounts }}{{ if eq .Destination "/var/www/html" }}{{ .Source }}{{ end }}{{ end }}' "$CONTAINER")
+  if [[ ! -d "$CODEBASE" ]]; then
+    CODEBASE="removed"
+  fi
   STATS=$(docker stats -a --no-stream --format '{{ .CPUPerc }} {{ .MemPerc }}' "$CONTAINER")
-  OUTPUT="${OUTPUT}"$'\n'"$NAME $RUNNING $URL $PROFILE $STATS $CODEBASE"
+  OUTPUT="${OUTPUT}"$'\n'"$NAME $RUNNING $URL $STATS $CODEBASE"
 done
 
 echo "$OUTPUT" | column -t -s ' '

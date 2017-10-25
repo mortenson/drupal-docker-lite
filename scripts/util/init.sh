@@ -33,7 +33,11 @@ if [[ "$CONTAINER" ]]; then
 fi
 
 if [[ ! "$COMPOSE_PATH" ]] || [[ ! "$HAS_ARGS" && $# -gt 0 ]]; then
-  echo "Cannot find docker-compose.yml path for $NAME."
+  if [[ "$NAME" ]]; then
+    echo "Cannot find docker-compose.yml path for $NAME."
+  else
+    echo "Cannot find nearest docker-compose.yml path."
+  fi
   exit 1
 fi
 
