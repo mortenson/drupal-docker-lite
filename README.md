@@ -7,11 +7,17 @@ that set up everything for me, so I wrote one!
 
 If you want a more complicated setup, see [Alternatives](#alternatives).
 
-# Requirements
+# System requirements
 
 1. Docker 17.05 or later. This project has admittedly only been tested with
 Docker for Mac.
 1. Composer
+
+# Codebase requirements
+
+This setup only supports Drupal 8 sites that have Drush locally required. If
+your codebase meets these requirements but still isn't working, please file
+an issue!
 
 # Installation
 
@@ -23,12 +29,6 @@ That's it!
 
 Feel free to run `./ddl.sh start` whenever you can't remember the address for your
 site, or if your Docker containers are down.
-
-# Codebase requirements
-
-This setup only supports Drupal 8 sites that have Drush locally required. If
-your codebase meets these requirements but still isn't working, please file
-an issue!
 
 # ddl.sh commands
 
@@ -68,6 +68,11 @@ Now a `ddl` command should be available to you. Run `ddl help` to get started.
 
 Since this project just uses stock docker-compose, you should be able to clone
 it into multiple directories and spin up/down instances without any issues.
+
+# How does it all work?
+
+Please see [DETAILS](docs/DETAILS.md) for information about this project's
+implementation.
 
 # Alternatives
 
