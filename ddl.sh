@@ -8,6 +8,7 @@ COMMAND=$1
 if [[ ! "$COMMAND" || $COMMAND = "help" ]]; then
   echo "Commands available (omit NAME to use the local instance):"
   echo " create [DIR]             Creates a new instance in a given directory."
+  echo " customize                Customizes instance to use local images for PHP and MySQL."
   echo " drupal [NAME] [COMMAND]  Run Drupal Console for a given instance."
   echo " drush [NAME] [COMMAND]   Run Drush for a given instance."
   echo " inspect [NAME]           List all containers for a given instance."
