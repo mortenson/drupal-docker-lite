@@ -68,7 +68,7 @@ fi
 if [[ $NEW_INSTALL ]]; then
   echo "Please enter a profile name to install. i.e. standard or lightning"
   read -p "Profile: " PROFILE
-  ${0%/*}/drush --sites-subdir=default site-install --site-name="$PROFILE" $PROFILE -y
+  ${0%/*}/drush.sh --sites-subdir=default site-install --site-name="$PROFILE" $PROFILE -y
   if [ $? -ne 0 ]; then
     echo "Installation failed. Please consult the log and file an issue if appropriate"
     exit 1
@@ -76,7 +76,7 @@ if [[ $NEW_INSTALL ]]; then
 fi
 
 if [[ $NEW_INSTALL ]]; then
-  URL=$(${0%/*}/drush uli | tr -d '\r')
+  URL=$(${0%/*}/drush.sh uli | tr -d '\r')
 else
   URL=$(${0%/*}/url.sh)
 fi
