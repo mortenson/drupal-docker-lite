@@ -7,12 +7,13 @@ COMMAND=$1
 
 if [[ ! "$COMMAND" || $COMMAND = "help" ]]; then
   echo "Commands available (omit NAME to use the local instance):"
-  echo " inspect [NAME]           List all containers for a given instance."
+  echo " create [DIR]             Creates a new instance in a given directory."
   echo " drupal [NAME] [COMMAND]  Run Drupal Console for a given instance."
   echo " drush [NAME] [COMMAND]   Run Drush for a given instance."
+  echo " inspect [NAME]           List all containers for a given instance."
   echo " list                     List all running drupal-docker-lite instances."
   echo " logs [NAME] [OPTIONS]    Print logs for a given instance. Run \"docker help logs\" for options."
-  echo " mail [NAME]              Open the mailhog interface for a given container."
+  echo " mail [NAME]              Open the Mailhog interface for a given instance."
   echo " proxy                    Restarts the reverse proxy."
   echo " prune                    Remove unused Docker volumes and images."
   echo " rebuild [NAME]           Rebuilds a given instance."

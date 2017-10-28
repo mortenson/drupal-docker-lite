@@ -36,12 +36,13 @@ Common operations have been abstracted into commands that can be run with
 `ddl.sh`. Omitting the instance name for any command will use the local
 drupal-docker-lite instance.
 
-- `inspect [NAME]` - List all containers for a given instance.
+- `create [DIR]` - Creates a new instance in a given directory.
 - `drupal [NAME] [COMMAND]` - Run Drupal Console for a given instance.
 - `drush [NAME] [COMMAND]` - Run drush for a given instance.
+- `inspect [NAME]` - List all containers for a given instance.
 - `list` - List all running drupal-docker-lite instances.
 - `logs [NAME] [OPTIONS]` - Print logs for a given instance. Run "docker help logs" for options.
-- `mail [NAME]` - Open the mailhog interface for a given container.
+- `mail [NAME]` - Open the Mailhog interface for a given instance.
 - `proxy` - Restarts the reverse proxy.
 - `prune` - Remove unused Docker volumes and images.
 - `rebuild [NAME]` - Rebuilds a given instance.
