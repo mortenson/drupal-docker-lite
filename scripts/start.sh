@@ -81,10 +81,14 @@ else
   URL=$(${0%/*}/url.sh)
 fi
 
-if type "open" &> /dev/null; then
-  open $URL
-elif type "xdg-open" &> /dev/null; then
-  xdg-open $URL
+if [[ ! "$NO_OPEN" ]]; then
+  if type "open" &> /dev/null; then
+    open $URL
+  elif type "xdg-open" &> /dev/null; then
+    xdg-open $URL
+  else
+    echo "Docker has been started"
+  fi
 else
-  echo "Docker has been started"
+  echo "Startup finished. Visit site at $URL"
 fi

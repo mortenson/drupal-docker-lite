@@ -19,6 +19,7 @@ if [[ ! "$COMMAND" || $COMMAND = "help" ]]; then
   echo " remove [NAME]            Stop and remove a given instance, permanently. NAME is required for safety."
   echo " start [NAME]             Start a given instance."
   echo " stop [NAME]              Stop a given instance."
+  echo " update                   Makes sure that drupal-docker-lite is up to date for all instances."
   echo " url [NAME]               Print the URL for a given instance."
   exit 1
 fi

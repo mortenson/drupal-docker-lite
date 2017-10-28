@@ -48,6 +48,7 @@ drupal-docker-lite instance.
 - `remove [NAME]` - Stop and remove a given instance, permanently.
 - `start [NAME]` - Start a given instance.
 - `stop [NAME]` - Stop a given instance.
+- `update` - Makes sure that drupal-docker-lite is up to date for all instances.
 - `url [NAME]` - Print the URL for a given instance.
 
 ## Making ddl.sh globally available
