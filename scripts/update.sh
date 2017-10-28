@@ -6,8 +6,10 @@ if ! type "git" &> /dev/null; then
 fi
 
 update_git() {
-  ORIGIN=$(git remote get-url origin)
-  if [[ "$ORIGIN" != "git@github.com:mortenson/drupal-docker-lite.git" && "$ORIGIN" != "https://github.com/mortenson/drupal-docker-lite.git" ]]; then
+  BRANCH=$(git name-rev --name-only HEAD)
+  REMOTE=$(git config "branch.$BRANCH.remote")
+  URL=$(git remote get-url "$REMOTE")
+  if [[ "$URL" != "git@github.com:mortenson/drupal-docker-lite.git" && "$URL" != "https://github.com/mortenson/drupal-docker-lite.git" ]]; then
     echo "Project does not use mortenson/drupal-docker-lite as a remote"
     return
   fi
@@ -48,7 +50,7 @@ for INSTANCE in $INSTANCES; do
       update_git
       echo "Rebuilding $NAME..."
       NO_OPEN=true ${0%/scripts/update.sh}/ddl.sh rebuild &> /dev/null
-      echo "Done!"
+      echo "Done"
     else
       echo "$NAME is running, but the root directory cannot be determined"
     fi
@@ -58,4 +60,4 @@ for INSTANCE in $INSTANCES; do
   echo
 done
 
-echo "Done updating local drupal-docker-lite instances!"
+echo "Finished updating local drupal-docker-lite instances"
