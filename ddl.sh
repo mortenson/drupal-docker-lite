@@ -29,7 +29,7 @@ fi
 shift
 
 if [ -f "$BASEPATH/$COMMAND.sh" ]; then
-  if [[ ! $COMMAND =~ ^list|proxy|prune|update$ ]]; then
+  if [[ ! $COMMAND =~ ^list|proxy|prune|update|create$ ]]; then
     . "$BASEPATH/util/init.sh";
   fi
   DDL=$0 "$BASEPATH/$COMMAND.sh" "$@"
