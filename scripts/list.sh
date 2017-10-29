@@ -1,5 +1,4 @@
 #!/bin/bash
-cd "${0%/*}"
 
 INSTANCES=$(docker ps -a -q --filter "label=drupaldockerlite" | xargs docker inspect -f '{{index .Config.Labels "com.docker.compose.project"}}'| uniq)
 
@@ -8,15 +7,15 @@ if [[ ! "$INSTANCES" ]]; then
   exit 0
 fi
 
-OUTPUT="NAME RUNNING URL CPU MEMORY CODEBASE"
+OUTPUT="NAME RUNNING URL CODEBASE"
 
 for INSTANCE in $INSTANCES; do
   NAME=$INSTANCE
   CONTAINER=$(docker ps -a -q --filter "label=drupaldockerlite" --filter "label=com.docker.compose.project=$NAME" --filter "name=php")
   if [[ "$CONTAINER" ]]; then
-  RUNNING=$(docker inspect -f {{.State.Running}} $CONTAINER)
+    RUNNING=$(docker inspect -f {{.State.Running}} $CONTAINER)
     if [[ $RUNNING = "true" ]]; then
-      URL=$(./url.sh "$NAME")
+      URL=$($DDL url "$NAME")
       if [ $? -ne 0 ]; then
         URL="n/a"
       fi
@@ -27,14 +26,12 @@ for INSTANCE in $INSTANCES; do
     if [[ ! -d "$CODEBASE" ]]; then
       CODEBASE="removed"
     fi
-    STATS=$(docker stats -a --no-stream --format '{{ .CPUPerc }} {{ .MemPerc }}' "$CONTAINER")
   else
     URL="n/a"
     RUNNING="n/a"
-    STATS="0% 0%"
     CODEBASE="n/a"
   fi
-  OUTPUT="${OUTPUT}"$'\n'"$NAME $RUNNING $URL $STATS $CODEBASE"
+  OUTPUT="${OUTPUT}"$'\n'"$NAME $RUNNING $URL $CODEBASE"
 done
 
 echo "$OUTPUT" | column -t -s ' '

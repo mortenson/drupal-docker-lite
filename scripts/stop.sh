@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. "${0%/*}/util/init.sh"
-
 docker-compose stop
 
 if [ $? -ne 0 ]; then

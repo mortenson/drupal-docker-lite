@@ -60,8 +60,8 @@ where the proxy is not running.
 The ddl.sh script was designed to be readable by anyone familiar with Bash and
 Docker Compose, which will hopefully make contribution and customization easy.
 
-When you run `./ddl.sh [COMMAND]`, it calls the matching Bash script in the
-scripts directory. Some scripts then call `scripts/util/init.sh`, which tries
-to determine the docker-compose.yml directory for a given instance. This is how
-you can run `./ddl.sh drush st` to use the local instance and
-`./ddl.sh drush [INSTANCE] st` for an arbitrary instance.
+When you run `./ddl.sh [COMMAND] [NAME]`, the script tries to determine the
+docker-compose.yml directory for a given instance name, then sends arguments
+to the relevant script in `./scripts`. This is how you can run
+`./ddl.sh drush st` to use the local instance and
+`./ddl.sh drush [NAME] st` for an arbitrary instance.

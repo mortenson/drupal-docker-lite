@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. "${0%/*}/util/init.sh"
-
 docker-compose pull
 docker-compose build --pull
 
@@ -11,7 +9,7 @@ if [ $? -ne 0 ]; then
 fi
 
 docker-compose down
-${0%/*}/start.sh
+$DDL start
 
 if [ $? -ne 0 ]; then
   exit 1

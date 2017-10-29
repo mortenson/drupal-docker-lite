@@ -5,11 +5,6 @@ if ! type "git" &> /dev/null; then
   exit 1
 fi
 
-if [[ ! -f docker-compose.yml || ! -f ddl.sh ]]; then
-  echo "Please run this command from the root of a drupal-docker-lite instance"
-  exit 1
-fi
-
 if [[ -d db || -d web ]]; then
   echo "This instance already appears to be customized"
   exit 1
@@ -46,7 +41,7 @@ mv tmp docker-compose.yml
 
 echo "Rebuilding containers..."
 
-NO_OPEN=true ./ddl.sh rebuild &> /dev/null
+NO_OPEN=true $DDL rebuild &> /dev/null
 
 if [[ $? -ne 0 ]]; then
   echo "Failed to rebuild containers"

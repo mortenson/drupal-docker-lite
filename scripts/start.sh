@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. "${0%/*}/util/init.sh"
-
 DOCKER_VERSION=$(docker -v | sed 's/Docker version //')
 DOCKER_VERSION=(${DOCKER_VERSION//./ })
 
@@ -17,7 +15,7 @@ if [ ! -f ".env" ]; then
   if [[ $(docker ps -q -a --filter name="$PREFIX"_) ]]; then
     echo "A Docker instance using this domain already exists:"
     docker ps -a --filter name="$PREFIX"_
-    echo "Please stop/remove the containers above then run ./start.sh again"
+    echo "Please stop/remove the containers above then run ./ddl.sh start again"
     exit 1
   fi
   printf "VIRTUAL_HOST=$DOMAIN\nCOMPOSE_PROJECT_NAME=$DOMAIN" > .env
@@ -62,13 +60,13 @@ if [ $? -ne 0 ]; then
 fi
 
 if [ ! $(docker ps -a -q --filter name=ddl_proxy | xargs docker start) ]; then
-  ${0%/*}/proxy.sh &>/dev/null
+  $DDL proxy &>/dev/null
 fi
 
 if [[ $NEW_INSTALL ]]; then
   echo "Please enter a profile name to install. i.e. standard or lightning"
   read -p "Profile: " PROFILE
-  ${0%/*}/drush.sh --sites-subdir=default site-install --site-name="$PROFILE" $PROFILE -y
+  $DDL drush --sites-subdir=default site-install --site-name="$PROFILE" $PROFILE -y
   if [ $? -ne 0 ]; then
     echo "Installation failed. Please consult the log and file an issue if appropriate"
     exit 1
@@ -76,9 +74,9 @@ if [[ $NEW_INSTALL ]]; then
 fi
 
 if [[ $NEW_INSTALL ]]; then
-  URL=$(${0%/*}/drush.sh uli | tr -d '\r')
+  URL=$($DDL drush uli | tr -d '\r')
 else
-  URL=$(${0%/*}/url.sh)
+  URL=$($DDL url)
 fi
 
 if [[ ! "$NO_OPEN" ]]; then
@@ -87,7 +85,7 @@ if [[ ! "$NO_OPEN" ]]; then
   elif type "xdg-open" &> /dev/null; then
     xdg-open $URL
   else
-    echo "Docker has been started"
+    echo "Startup finished. Visit site at $URL"
   fi
 else
   echo "Startup finished. Visit site at $URL"

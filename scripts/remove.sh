@@ -1,13 +1,6 @@
 #!/bin/bash
 
-cd "${0%/*}"
-
-NAME=$1
-
-if [[ ! "$NAME" ]]; then
-  echo "An instance name is required"
-  exit 1
-fi
+NAME=$(docker-compose ps -q php | xargs docker inspect -f '{{index .Config.Labels "com.docker.compose.project"}}')
 
 CONTAINERS=$(docker ps -q -a --filter "label=com.docker.compose.project=$NAME" --filter "label=drupaldockerlite")
 

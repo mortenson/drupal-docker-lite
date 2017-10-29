@@ -21,4 +21,4 @@ fi
 
 cd $DIR
 
-./ddl.sh start
+$DDL start

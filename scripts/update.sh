@@ -25,8 +25,6 @@ update_git() {
 
 echo "Updating the codebase ddl.sh was ran from..."
 
-cd "${0%/scripts/update.sh}"
-
 update_git
 
 echo
@@ -49,7 +47,7 @@ for INSTANCE in $INSTANCES; do
       echo "Updating $NAME codebase..."
       update_git
       echo "Rebuilding $NAME..."
-      NO_OPEN=true ${0%/scripts/update.sh}/ddl.sh rebuild &> /dev/null
+      NO_OPEN=true $DDL rebuild $NAME &> /dev/null
       echo "Done"
     else
       echo "$NAME is running, but the root directory cannot be determined"

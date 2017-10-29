@@ -1,7 +1,5 @@
 #!/bin/bash
 
-. "${0%/*}/util/init.sh"
-
 DOMAIN=$(docker-compose exec php printenv VIRTUAL_HOST | tr -d '\r')
 
 if [ "$(docker ps -q --filter name=ddl_proxy)" ]; then
