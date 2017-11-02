@@ -73,7 +73,8 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-if [ ! $(docker ps -a -q --filter name=ddl_proxy | xargs docker start) ]; then
+docker ps -a -q --filter name=ddl_proxy --filter status=exited | xargs docker start &>/dev/null
+if [ ! $(docker ps -q --filter name=ddl_proxy) ]; then
   $DDL proxy &>/dev/null
 fi
 
