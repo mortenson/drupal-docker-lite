@@ -29,13 +29,27 @@ if [ ! -d "code" ]; then
     echo "Creation of $PROJECT project failed. Please consult the log and file an issue if appropriate"
     exit 1
   fi
-  find code -name default.settings.php -not -path "*vendor*" -execdir cp {} settings.php \;
-  cat settings.php.txt >> $(find code -name settings.php -not -path "*vendor*")
   NEW_INSTALL=1
 fi
 
 if [ ! -d "code/docroot" ] && [ -d "code/web" ]; then
   ln -s web code/docroot
+fi
+
+if [[ ! -f code/docroot/sites/default/settings.php && -f code/docroot/sites/default/default.settings.php ]]; then
+  if [[ ! -w code/docroot/sites/default ]]; then
+    echo "Adding settings.php file, I'll need sudo for this"
+    sudo chmod u+w code/docroot/sites/default/* code/docroot/sites/default
+  fi
+  cp code/docroot/sites/default/default.settings.php code/docroot/sites/default/settings.php
+fi
+
+if [[ -f code/docroot/sites/default/settings.php ]] && ! grep -q "DRUPAL_DOCKER_LITE" code/docroot/sites/default/settings.php; then
+  if [[ ! -w code/docroot/sites/default || ! -w code/docroot/sites/default/settings.php  ]]; then
+    echo "Modifying settings.php file, I'll need sudo for this"
+    sudo chmod u+w code/docroot/sites/default/* code/docroot/sites/default
+  fi
+  cat settings.php.txt >> code/docroot/sites/default/settings.php
 fi
 
 docker network create ddl_proxy &> /dev/null

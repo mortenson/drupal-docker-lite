@@ -1,10 +1,14 @@
-$databases['default']['default'] = array (
-  'database' => 'drupal',
-  'username' => 'drupal',
-  'password' => 'password',
-  'prefix' => '',
-  'host' => 'mysql',
-  'port' => '3306',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql',
-);
+
+// Local database settings when using drupal-docker-lite
+if (isset($_SERVER['DRUPAL_DOCKER_LITE'])) {
+  $databases['default']['default'] = [
+    'database' => 'drupal',
+    'username' => 'drupal',
+    'password' => 'password',
+    'prefix' => '',
+    'host' => 'mysql',
+    'port' => '3306',
+    'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+    'driver' => 'mysql',
+  ];
+}
