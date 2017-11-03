@@ -55,6 +55,12 @@ fi
 docker network create ddl_proxy &> /dev/null
 docker-compose up -d
 
+docker-compose exec php pwd &> /dev/null
+if [ $? -ne 0 ]; then
+  echo "The codebase volume appears to be broken. Please run ./ddl.sh rebuild to rebuild your containers."
+  exit 1
+fi
+
 DOMAIN=$(docker-compose exec php printenv VIRTUAL_HOST | tr -d '\r')
 
 HOSTS_ENTRY="127.0.0.1 $DOMAIN"
