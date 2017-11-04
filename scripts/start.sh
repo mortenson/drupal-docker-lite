@@ -29,7 +29,6 @@ if [ ! -d "code" ]; then
     echo "Creation of $PROJECT project failed. Please consult the log and file an issue if appropriate"
     exit 1
   fi
-  NEW_INSTALL=1
 fi
 
 if [ ! -d "code/docroot" ] && [ -d "code/web" ]; then
@@ -84,7 +83,7 @@ if [ ! $(docker ps -q --filter name=ddl_proxy) ]; then
   $DDL proxy &>/dev/null
 fi
 
-if [[ $NEW_INSTALL ]]; then
+if [[ ! $($DDL drush st --fields=install-profile | tr -d '\r') ]]; then
   echo "Please enter a profile name to install. i.e. standard or lightning"
   read -p "Profile: " PROFILE
   $DDL drush --sites-subdir=default site-install --site-name="$PROFILE" $PROFILE -y
@@ -92,9 +91,6 @@ if [[ $NEW_INSTALL ]]; then
     echo "Installation failed. Please consult the log and file an issue if appropriate"
     exit 1
   fi
-fi
-
-if [[ $NEW_INSTALL ]]; then
   URL=$($DDL drush uli | tr -d '\r')
 else
   URL=$($DDL url)
