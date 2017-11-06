@@ -1,6 +1,6 @@
 
 // Local database settings when using drupal-docker-lite
-if (isset($_SERVER['DRUPAL_DOCKER_LITE'])) {
+if (isset($_ENV['DRUPAL_DOCKER_LITE'])) {
   $databases['default']['default'] = [
     'database' => 'drupal',
     'username' => 'drupal',
