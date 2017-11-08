@@ -6,12 +6,12 @@ CONTAINERS=$(docker ps -q -a --filter "label=com.docker.compose.project=$NAME" -
 
 if [[ ! "$CONTAINERS" ]]; then
   echo "No containers found named $NAME"
-  exit 0
+  exit 1
 fi
 
 read -p "This will permanently remove $NAME containers and volumes, which could have negative consequences. Are you sure? [y/n] "
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-  exit 1
+  exit 0
 fi
 
 for CONTAINER in $CONTAINERS; do
@@ -25,3 +25,7 @@ for CONTAINER in $CONTAINERS; do
 done
 
 docker volume prune --force
+
+echo "Finished removing containers and volumes for $NAME"
+echo
+echo "The codebase for $NAME still exists at $PWD, please remove it manually if needed"
