@@ -29,7 +29,7 @@ update_git
 
 echo
 
-INSTANCES=$(docker ps -a -q --filter "label=drupaldockerlite" | xargs docker inspect -f '{{index .Config.Labels "com.docker.compose.project"}}'| uniq)
+INSTANCES=$(docker ps -a -q --filter "label=drupaldockerlite" | xargs docker inspect -f '{{index .Config.Labels "com.docker.compose.project"}}' | sort | uniq)
 
 if [[ ! "$INSTANCES" ]]; then
   echo "No drupal-docker-lite instances are running"
