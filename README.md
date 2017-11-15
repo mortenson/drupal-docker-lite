@@ -73,11 +73,6 @@ Now a `ddl` command should be available to you. Run `ddl help` to get started.
 Since this project just uses stock docker-compose, you should be able to clone
 it into multiple directories and spin up/down instances without any issues.
 
-# How does it all work?
-
-Please see [DETAILS](docs/DETAILS.md) for information about this project's
-implementation.
-
 # Running PHPUnit tests
 
 PHP unit tests can be run using the `ddl exec` command, ex:
@@ -93,6 +88,11 @@ ddl exec phantomjs --ssl-protocol=any --ignore-ssl-errors=true ./docroot/vendor/
 ```
 
 then in another session run the Javascript test.
+
+# How does it all work?
+
+Please see [DETAILS](docs/DETAILS.md) for information about this project's
+implementation.
 
 # Alternatives
 
