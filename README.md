@@ -68,6 +68,22 @@ ln -s ~/drupal-docker-lite/ddl.sh /usr/local/bin/ddl
 
 Now a `ddl` command should be available to you. Run `ddl help` to get started.
 
+# Using an existing codebase
+
+You can use an existing codebase by cloning it into a "code" subdirectory of
+this project. For example:
+
+1. `git clone git@github.com:mortenson/drupal-docker-lite.git your-project`
+1. `cd your-project`
+1. `git clone <your codebase URL> code`
+1. `./ddl.sh start`
+
+An existing database dump can then be imported by running:
+
+1. `docker exec -i $(docker-compose ps -q php) drush sqlc < local_dump.sql`
+
+Dump/import commands will be added in the future.
+
 # Multiple instances
 
 Since this project just uses stock docker-compose, you should be able to clone
