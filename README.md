@@ -40,7 +40,7 @@ drupal-docker-lite instance.
 - `customize` - Customizes instance to use local images for PHP and MySQL.
 - `drupal [NAME] [COMMAND]` - Run Drupal Console for a given instance.
 - `drush [NAME] [COMMAND]` - Run drush for a given instance.
-- `exec [COMMAND]` - Executes a single command for a given instance.
+- `exec [NAME] [COMMAND]` - Executes a single command for a given instance.
 - `inspect [NAME]` - List all containers for a given instance.
 - `list` - List all running drupal-docker-lite instances.
 - `logs [NAME] [OPTIONS]` - Print logs for a given instance. Run "docker help logs" for options.

@@ -11,7 +11,7 @@ if [[ ! "$COMMAND" || $COMMAND = "help" ]]; then
   echo " customize                Customizes instance to use local images for PHP and MySQL."
   echo " drupal [NAME] [COMMAND]  Run Drupal Console for a given instance."
   echo " drush [NAME] [COMMAND]   Run Drush for a given instance."
-  echo " exec [COMMAND]           Executes a single command for a given instance."
+  echo " exec [NAME] [COMMAND]    Executes a single command for a given instance."
   echo " inspect [NAME]           List all containers for a given instance."
   echo " list                     List all running drupal-docker-lite instances."
   echo " logs [NAME] [OPTIONS]    Print logs for a given instance. Run \"docker help logs\" for options."
