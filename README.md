@@ -80,7 +80,7 @@ this project. For example:
 
 An existing database dump can then be imported by running:
 
-1. `docker exec -i $(docker-compose ps -q php) drush sqlc < local_dump.sql`
+1. `docker exec -i $(docker-compose ps -q php) drush sqlc --root=docroot < local_dump.sql`
 
 Dump/import commands will be added in the future.
 
