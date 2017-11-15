@@ -26,6 +26,8 @@ services:
     environment:
       - VIRTUAL_HOST=${VIRTUAL_HOST-localhost}
       - DRUPAL_DOCKER_LITE=1
+      - SIMPLETEST_DB=mysql://drupal:password@mysql:3306/drupal#simpletest
+      - SIMPLETEST_BASE_URL=http://localhost
     labels:
       - 'traefik.enable=true'
       - 'traefik.backend=DDL-${VIRTUAL_HOST-localhost}'
