@@ -11,9 +11,6 @@ docker run -d -p 8085:8080 -p 80:80 -v $PWD/../traefik.toml:/etc/traefik/traefik
  --name ddl_proxy\
  traefik
 
-if [ $? -ne 0 ]; then
-  echo "Proxy startup failed. Is port 8085 or 80 in use?"
-  exit 1
-fi
+message_on_error "Proxy startup failed. Is port 8085 or 80 in use?"
 
 echo "The proxy has been started. An administrative console can be found at http://localhost:8085"

@@ -41,6 +41,8 @@ drupal-docker-lite instance.
 - `drupal [NAME] [COMMAND]` - Run Drupal Console for a given instance.
 - `drush [NAME] [COMMAND]` - Run drush for a given instance.
 - `exec [NAME] [COMMAND]` - Executes a single command for a given instance.
+- `export [NAME] [DESTINATION]` - Exports a database dump to a given directory.
+- `import [NAME] [SOURCE]` - Imports a given database dump.
 - `inspect [NAME]` - List all containers for a given instance.
 - `list` - List all running drupal-docker-lite instances.
 - `logs [NAME] [OPTIONS]` - Print logs for a given instance. Run "docker help logs" for options.
@@ -67,22 +69,6 @@ ln -s ~/drupal-docker-lite/ddl.sh /usr/local/bin/ddl
 ```
 
 Now a `ddl` command should be available to you. Run `ddl help` to get started.
-
-# Using an existing codebase
-
-You can use an existing codebase by cloning it into a "code" subdirectory of
-this project. For example:
-
-1. `git clone git@github.com:mortenson/drupal-docker-lite.git your-project`
-1. `cd your-project`
-1. `git clone <your codebase URL> code`
-1. `./ddl.sh start`
-
-An existing database dump can then be imported by running:
-
-1. `docker exec -i $(docker-compose ps -q php) drush sqlc --root=docroot < local_dump.sql`
-
-Dump/import commands will be added in the future.
 
 # Multiple instances
 

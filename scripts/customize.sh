@@ -43,9 +43,6 @@ echo "Rebuilding containers..."
 
 NO_OPEN=true $DDL rebuild &> /dev/null
 
-if [[ $? -ne 0 ]]; then
-  echo "Failed to rebuild containers"
-  exit 1
-fi
+message_on_error "Failed to rebuild containers"
 
 echo "Local instance has been customized! You can now add custom configuration to ./db or ./web"

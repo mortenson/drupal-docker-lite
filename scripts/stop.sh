@@ -2,9 +2,6 @@
 
 docker-compose stop
 
-if [ $? -ne 0 ]; then
-  echo "There was an error stopping Docker. Please consult the log and file an issue if appropriate"
-  exit 1
-fi
+message_on_error "Error encountered when stopping containers"
 
 echo "Docker has been stopped, sweet dreams..."

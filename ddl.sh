@@ -7,27 +7,38 @@ COMMAND=$1
 
 if [[ ! "$COMMAND" || $COMMAND = "help" ]]; then
   echo "Commands available (omit NAME to use the local instance):"
-  echo " create [DIR]             Creates a new instance in a given directory."
-  echo " customize                Customizes instance to use local images for PHP and MySQL."
-  echo " drupal [NAME] [COMMAND]  Run Drupal Console for a given instance."
-  echo " drush [NAME] [COMMAND]   Run Drush for a given instance."
-  echo " exec [NAME] [COMMAND]    Executes a single command for a given instance."
-  echo " inspect [NAME]           List all containers for a given instance."
-  echo " list                     List all running drupal-docker-lite instances."
-  echo " logs [NAME] [OPTIONS]    Print logs for a given instance. Run \"docker help logs\" for options."
-  echo " mail [NAME]              Open the Mailhog interface for a given instance."
-  echo " proxy                    Restarts the reverse proxy."
-  echo " prune                    Remove unused Docker volumes and images."
-  echo " rebuild [NAME]           Rebuilds a given instance."
-  echo " remove [NAME]            Stop and remove a given instance, permanently. NAME is required for safety."
-  echo " start [NAME]             Start a given instance."
-  echo " stop [NAME]              Stop a given instance."
-  echo " update                   Makes sure that drupal-docker-lite is up to date for all instances."
-  echo " url [NAME]               Print the URL for a given instance."
+  echo " create [DIR]                   Creates a new instance in a given directory."
+  echo " customize                      Customizes instance to use local images for PHP and MySQL."
+  echo " drupal [NAME] [COMMAND]        Run Drupal Console for a given instance."
+  echo " drush [NAME] [COMMAND]         Run Drush for a given instance."
+  echo " exec [NAME] [COMMAND]          Executes a single command for a given instance."
+  echo " export [NAME] [DESTINATION]    Exports a database dump to a given directory."
+  echo " import [NAME] [SOURCE]         Imports a given database dump."
+  echo " inspect [NAME]                 List all containers for a given instance."
+  echo " list                           List all running drupal-docker-lite instances."
+  echo " logs [NAME] [OPTIONS]          Print logs for a given instance. Run \"docker help logs\" for options."
+  echo " mail [NAME]                    Open the Mailhog interface for a given instance."
+  echo " proxy                          Restarts the reverse proxy."
+  echo " prune                          Remove unused Docker volumes and images."
+  echo " rebuild [NAME]                 Rebuilds a given instance."
+  echo " remove [NAME]                  Stop and remove a given instance, permanently. NAME is required for safety."
+  echo " start [NAME]                   Start a given instance."
+  echo " stop [NAME]                    Stop a given instance."
+  echo " update                         Makes sure that drupal-docker-lite is up to date for all instances."
+  echo " url [NAME]                     Print the URL for a given instance."
   exit 1
 fi
 
 shift
+
+message_on_error() {
+  if [ $? -ne 0 ]; then
+    echo "$1"
+    exit 1
+  fi
+}
+
+export -f message_on_error
 
 if [ -f "$BASEPATH/$COMMAND.sh" ]; then
   if [[ ! $COMMAND =~ ^list|proxy|prune|update|create$ ]]; then
