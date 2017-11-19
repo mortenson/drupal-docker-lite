@@ -105,7 +105,7 @@ fi
 
 if [[ ! "$NO_PROFILE" && ! $($DDL drush st --fields=install-profile | tr -d '\r') ]]; then
   echo "Drupal does not appear to be installed yet"
-  if [[ 1 || "$PROJECT" =~ "git" ]]; then
+  if [[ "$PROJECT" =~ "git" ]]; then
     read -p "Do you have an existing database dump to import? [y/n] "
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
       exit 0
