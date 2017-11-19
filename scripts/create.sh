@@ -14,11 +14,12 @@ fi
 
 git clone https://github.com/mortenson/drupal-docker-lite.git "$DIR"
 
-if [[ $? -ne 0 || ! -d $DIR ]]; then
-  echo "Errors encountered when cloning drupal-docker-lite"
-  exit 1
-fi
+message_on_error "Errors encountered when cloning drupal-docker-lite"
 
 cd $DIR
 
 $DDL start
+
+message_on_error "Errors encountered when starting drupal-docker-lite"
+
+echo "New drupal-docker-lite created in \"$DIR\""
