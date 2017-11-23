@@ -91,6 +91,13 @@ ddl exec phantomjs --ssl-protocol=any --ignore-ssl-errors=true ./docroot/vendor/
 
 then in another session run the Javascript test.
 
+# Using XDebug
+
+To enable XDebug, uncomment the `xdebug.*` lines from php.ini, then run `ddl.sh rebuild`.
+
+From there you'll need to configure your IDE to listen on port 9000 and accept
+external connections, and then debugging should just work.
+
 # How does it all work?
 
 Please see [DETAILS](docs/DETAILS.md) for information about this project's

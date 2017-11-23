@@ -39,6 +39,7 @@ services:
       - '0:80'
     volumes:
       - ./code:/var/www/html:cached
+      - ./php.ini:/usr/local/etc/php/conf.d/ddl.ini
     depends_on:
       - mysql
       - mailhog
