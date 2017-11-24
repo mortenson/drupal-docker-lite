@@ -11,7 +11,7 @@ If you want a more complicated setup, see [Alternatives](#alternatives).
 
 1. Docker 17.05 or later. This project has admittedly only been tested with
 Docker for Mac.
-1. Composer
+1. Composer, unless you have an existing codebase.
 
 # Codebase requirements
 
@@ -69,11 +69,6 @@ ln -s ~/drupal-docker-lite/ddl.sh /usr/local/bin/ddl
 ```
 
 Now a `ddl` command should be available to you. Run `ddl help` to get started.
-
-# Multiple instances
-
-Since this project just uses stock docker-compose, you should be able to clone
-it into multiple directories and spin up/down instances without any issues.
 
 # Running PHPUnit tests
 
