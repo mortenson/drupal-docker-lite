@@ -1,7 +1,7 @@
 #!/bin/bash
 
 FILEPATH=$(readlink $0 || echo $0)
-BASEPATH=${FILEPATH%/*}/scripts
+BASEPATH=$(cd $(dirname $FILEPATH) && pwd)
 
 COMMAND=$1
 
@@ -40,11 +40,11 @@ message_on_error() {
 
 export -f message_on_error
 
-if [ -f "$BASEPATH/$COMMAND.sh" ]; then
+if [ -f "$BASEPATH/scripts/$COMMAND.sh" ]; then
   if [[ ! $COMMAND =~ ^list|proxy|prune|update|create$ ]]; then
-    . "$BASEPATH/util/init.sh";
+    . "$BASEPATH/scripts/util/init.sh";
   fi
-  DDL=$0 "$BASEPATH/$COMMAND.sh" "$@"
+  DDL=$BASEPATH/ddl.sh "$BASEPATH/scripts/$COMMAND.sh" "$@"
 else
   echo "Command not recognized"
 fi
