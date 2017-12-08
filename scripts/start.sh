@@ -80,10 +80,10 @@ fi
 docker network create ddl_proxy &> /dev/null
 docker-compose up -d
 
-docker-compose exec php pwd &> /dev/null
+$DDL exec pwd &> /dev/null
 message_on_error "The codebase volume appears to be broken. Please run the rebuild command and try starting again."
 
-DOMAIN=$(docker-compose exec php printenv VIRTUAL_HOST | tr -d '\r')
+DOMAIN=$($DDL exec printenv VIRTUAL_HOST | tr -d '\r')
 
 HOSTS_ENTRY="127.0.0.1 $DOMAIN"
 

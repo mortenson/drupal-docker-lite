@@ -2,4 +2,4 @@
 
 URL=$($DDL url)
 
-docker-compose exec php drush --root="/var/www/html/docroot" -l $URL "$@"
+$DDL exec drush --root="/var/www/html/docroot" -l $URL "$@"

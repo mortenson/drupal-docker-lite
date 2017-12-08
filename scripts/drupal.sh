@@ -2,4 +2,4 @@
 
 URL=$($DDL url)
 
-docker-compose exec php drupal --root="/var/www/html/docroot" --uri="$URL" "$@"
+$DDL exec drupal --root="/var/www/html/docroot" --uri="$URL" "$@"

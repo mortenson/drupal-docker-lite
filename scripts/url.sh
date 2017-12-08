@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOMAIN=$(docker-compose exec php printenv VIRTUAL_HOST | tr -d '\r')
+DOMAIN=$($DDL exec printenv VIRTUAL_HOST | tr -d '\r')
 
 if [ "$(docker ps -q --filter name=ddl_proxy)" ]; then
   echo http://$DOMAIN

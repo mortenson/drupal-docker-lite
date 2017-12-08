@@ -7,7 +7,7 @@ if [ ! -f "$FILE" ]; then
   exit 1
 fi
 
-docker exec -i $(docker-compose ps -q php) mysql --user=drupal --password=password --database=drupal --host=mysql --port=3306 < $FILE
+$DDL exec mysql --user=drupal --password=password --database=drupal --host=mysql --port=3306 < $FILE
 
 message_on_error "Importing database dump $FILE failed"
 

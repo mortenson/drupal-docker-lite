@@ -12,7 +12,7 @@ if [ -e "$DESTINATION" ]; then
   exit 1
 fi
 
-docker exec -i $(docker-compose ps -q php) mysqldump --databases drupal --user=drupal --password=password --host=mysql --port=3306 > $DESTINATION
+$DDL exec mysqldump --databases drupal --user=drupal --password=password --host=mysql --port=3306 > $DESTINATION
 
 message_on_error "Exporting database dump failed"
 
