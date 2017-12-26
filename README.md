@@ -40,6 +40,7 @@ drupal-docker-lite instance.
 - `customize` - Customizes instance to use local images for PHP and MySQL.
 - `drupal [NAME] [COMMAND]` - Run Drupal Console for a given instance.
 - `drush [NAME] [COMMAND]` - Run drush for a given instance.
+- `drushlocal [NAME] [COMMAND]` - Run Drush locally for a given instance. 
 - `exec [NAME] [COMMAND]` - Executes a single command for a given instance.
 - `export [NAME] [DESTINATION]` - Exports a database dump to a given directory.
 - `import [NAME] [SOURCE]` - Imports a given database dump.

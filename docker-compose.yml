@@ -7,6 +7,8 @@ services:
       MYSQL_DATABASE: drupal
       MYSQL_USER: drupal
       MYSQL_PASSWORD: password
+    ports:
+      - '0:3306'
     volumes:
       - db:/var/lib/mysql:delegated
     networks:

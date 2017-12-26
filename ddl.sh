@@ -11,6 +11,7 @@ if [[ ! "$COMMAND" || $COMMAND = "help" ]]; then
   echo " customize                      Customizes instance to use local images for PHP and MySQL."
   echo " drupal [NAME] [COMMAND]        Run Drupal Console for a given instance."
   echo " drush [NAME] [COMMAND]         Run Drush for a given instance."
+  echo " drushlocal [NAME] [COMMAND]    Run Drush locally for a given instance."
   echo " exec [NAME] [COMMAND]          Executes a single command for a given instance."
   echo " export [NAME] [DESTINATION]    Exports a database dump to a given directory."
   echo " import [NAME] [SOURCE]         Imports a given database dump."
