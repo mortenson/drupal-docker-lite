@@ -25,6 +25,8 @@ update_git() {
 
 echo "Updating the codebase ddl.sh was ran from..."
 
+cd $(dirname $0)/..
+
 update_git
 
 echo
