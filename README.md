@@ -87,6 +87,14 @@ ddl exec phantomjs --ssl-protocol=any --ignore-ssl-errors=true ./docroot/vendor/
 
 then in another session run the Javascript test.
 
+# Running Simpletest tests
+
+Simpletest tests can be run using the `ddl exec` command, ex:
+
+```
+ddl exec php ./docroot/core/scripts/run-tests.sh --php /usr/local/bin/php --class "\Drupal\image\Tests\QuickEditImageControllerTest"
+```
+
 # Using XDebug
 
 To enable XDebug, uncomment the `xdebug.*` lines from php.ini, then run `ddl.sh rebuild`.
