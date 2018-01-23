@@ -118,8 +118,22 @@ if [[ ! "$NO_PROFILE" && ! $($DDL drush st --fields=install-profile | tr -d '\r'
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
       exit 0
     fi
-    echo "Please enter a profile name to install."
-    read -p "Profile: " PROFILE
+    PROFILES=$(find code/docroot -name '*.info.yml' -not -path '*test*' -exec grep 'type: profile' -ql {} \; -exec basename {} .info.yml \;)
+    echo "Which profile would you like to install?"
+    PS3="Selection: "
+    select PROFILE in $PROFILES
+    do
+      # Support users who type the name of the profile instead of the number.
+      if [[ "$PROFILES" =~ (^|$'\n')$REPLY($|$'\n') ]]; then
+        PROFILE=$REPLY
+      elif [[ "$PROFILE" == "" ]]; then
+        echo "'$REPLY' is not a valid selection"
+        continue
+      fi
+
+      echo "Installing $PROFILE..."
+      break
+    done
     $DDL drush --sites-subdir=default site-install --site-name="$PROFILE" $PROFILE -y
     message_on_error "Installation failed. Please consult the log and file an issue if appropriate"
   fi
