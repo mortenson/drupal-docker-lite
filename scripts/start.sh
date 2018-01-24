@@ -41,9 +41,6 @@ if [ ! -d "code" ]; then
     message_on_error "Failed to clone Drupal core"
     composer install --working-dir=code/docroot
     message_on_error "Failed to install Composer dependencies for Drupal core"
-    # @todo This is silly, we should fallback to a global Drush 9.
-    composer require drush/drush --working-dir=code/docroot
-    message_on_error "Failed to install Drush locally for Drupal core"
     echo "Drupal core has been checked out in code/docroot."
   else
     composer create-project $PROJECT code -s dev --no-interaction

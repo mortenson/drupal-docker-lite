@@ -13,12 +13,6 @@ If you want a more complicated setup, see [Alternatives](#alternatives).
 Docker for Mac.
 1. Composer, unless you have an existing codebase.
 
-# Codebase requirements
-
-This setup only supports Drupal 8 sites that have Drush locally required. If
-your codebase meets these requirements but still isn't working, please file
-an issue!
-
 # Installation
 
 1. `git clone git@github.com:mortenson/drupal-docker-lite.git your-project`
@@ -40,7 +34,7 @@ drupal-docker-lite instance.
 - `customize` - Customizes instance to use local images for PHP and MySQL.
 - `drupal [NAME] [COMMAND]` - Run Drupal Console for a given instance.
 - `drush [NAME] [COMMAND]` - Run drush for a given instance.
-- `drushlocal [NAME] [COMMAND]` - Run Drush locally for a given instance. 
+- `drushlocal [NAME] [COMMAND]` - Run Drush on your host for a given instance. 
 - `exec [NAME] [COMMAND]` - Executes a single command for a given instance.
 - `export [NAME] [DESTINATION]` - Exports a database dump to a given directory.
 - `import [NAME] [SOURCE]` - Imports a given database dump.
