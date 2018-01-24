@@ -42,6 +42,7 @@ drupal-docker-lite instance.
 - `list` - List all running drupal-docker-lite instances.
 - `logs [NAME] [OPTIONS]` - Print logs for a given instance. Run "docker help logs" for options.
 - `mail [NAME]` - Open the Mailhog interface for a given instance.
+- `phpunit [NAME] [FILENAME]` - Runs PHPUnit tests contained in the given file.
 - `proxy` - Restarts the reverse proxy.
 - `prune` - Remove unused Docker volumes and images.
 - `rebuild [NAME]` - Rebuilds a given instance.
@@ -67,7 +68,13 @@ Now a `ddl` command should be available to you. Run `ddl help` to get started.
 
 # Running PHPUnit tests
 
-PHP unit tests can be run using the `ddl exec` command, ex:
+PHPUnit tests can be run using the `ddl phpunit` command, ex:
+
+```
+ddl phpunit core/modules/field/tests/src/FunctionalJavascript/FormJSAddMoreTest.php
+```
+
+You can also run PHPUnit manually, if custom flags or debugging is needed:
 
 ```
 ddl exec ./docroot/vendor/bin/phpunit -c ./docroot/core ./docroot/core/tests/Drupal/KernelTests/Core/Form/FormCacheTest.php

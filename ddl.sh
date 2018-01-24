@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [[ ! "$ORIGINAL_PWD" ]]; then
+  ORIGINAL_PWD=$PWD
+fi
+
 FILEPATH=$(readlink $0 || echo $0)
 BASEPATH=$(cd $(dirname $FILEPATH) && pwd)
 
@@ -19,6 +23,7 @@ if [[ ! "$COMMAND" || $COMMAND = "help" ]]; then
   echo " list                           List all running drupal-docker-lite instances."
   echo " logs [NAME] [OPTIONS]          Print logs for a given instance. Run \"docker help logs\" for options."
   echo " mail [NAME]                    Open the Mailhog interface for a given instance."
+  echo " phpunit [NAME] [FILENAME]      Runs PHPUnit tests contained in the given file."
   echo " proxy                          Restarts the reverse proxy."
   echo " prune                          Remove unused Docker volumes and images."
   echo " rebuild [NAME]                 Rebuilds a given instance."
@@ -45,7 +50,7 @@ if [ -f "$BASEPATH/scripts/$COMMAND.sh" ]; then
   if [[ ! $COMMAND =~ ^list|proxy|prune|update|create$ ]]; then
     . "$BASEPATH/scripts/util/init.sh";
   fi
-  DDL=$BASEPATH/ddl.sh "$BASEPATH/scripts/$COMMAND.sh" "$@"
+  ORIGINAL_PWD=$ORIGINAL_PWD DDL=$BASEPATH/ddl.sh "$BASEPATH/scripts/$COMMAND.sh" "$@"
 else
   echo "Command not recognized"
 fi
