@@ -8,7 +8,7 @@ services:
       MYSQL_USER: drupal
       MYSQL_PASSWORD: password
     ports:
-      - '0:3306'
+      - '127.0.0.1:0:3306'
     volumes:
       - db:/var/lib/mysql:delegated
     networks:
@@ -18,7 +18,7 @@ services:
   mailhog:
     image: mailhog/mailhog
     ports:
-      - '0:8025'
+      - '127.0.0.1:0:8025'
     networks:
       - internal
     labels:
@@ -39,7 +39,7 @@ services:
       - 'traefik.port=80'
       - 'drupaldockerlite=true'
     ports:
-      - '0:80'
+      - '127.0.0.1:0:80'
     volumes:
       - ./code:/var/www/html:cached
       - ./php.ini:/usr/local/etc/php/conf.d/ddl.ini
