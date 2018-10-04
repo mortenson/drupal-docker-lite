@@ -22,7 +22,7 @@ if [ ! -f ".env" ]; then
 fi
 
 if [ ! -d "code" ]; then
-  echo "Please enter the name of a Composer project, a Git URL of an existing repository, or \"contrib\" if you're working on a Drupal project."
+  echo "Please enter the name of a Composer project, a Git URL of an existing repository, \"contrib\" if you're working on a Drupal project, or \"none\"."
   read -p "Project: " PROJECT
   if [[ "$PROJECT" =~ "git" ]]; then
     if ! type "git" &> /dev/null; then
@@ -42,6 +42,10 @@ if [ ! -d "code" ]; then
     composer install --working-dir=code/docroot
     message_on_error "Failed to install Composer dependencies for Drupal core"
     echo "Drupal core has been checked out in code/docroot."
+  elif [ "$PROJECT" == "none" ]; then
+    echo "Creating the \"code\" directory, please build your codebase there to start using DDL."
+    mkdir code
+    exit 0
   else
     composer create-project $PROJECT code -s dev --no-interaction
     message_on_error "Creation of Composer project $INPUT project failed. Please consult the log and file an issue if appropriate"
@@ -70,7 +74,7 @@ if [[ -f code/docroot/sites/default/settings.php ]] && ! grep -q "DRUPAL_DOCKER_
     echo "Modifying settings.php file, I'll need sudo for this"
     sudo chmod u+w code/docroot/sites/default/* code/docroot/sites/default
   fi
-  cat settings.php.txt >> code/docroot/sites/default/settings.php
+  cat $DDL_PATH/settings.php.txt >> code/docroot/sites/default/settings.php
   sed -i '' -e "s/settings\['hash_salt'\] = '';/settings\['hash_salt'\] = 'CHANGE_ME';/g" code/docroot/sites/default/settings.php
 fi
 

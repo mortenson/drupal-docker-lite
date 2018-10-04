@@ -12,6 +12,7 @@ COMMAND=$1
 if [[ ! "$COMMAND" || $COMMAND = "help" ]]; then
   echo "Commands available (omit NAME to use the local instance):"
   echo " create [DIR]                   Creates a new instance in a given directory."
+  echo " create-lite [DIR]              Creates a new minimal instance in a given directory."
   echo " customize                      Customizes instance to use local images for PHP and MySQL."
   echo " drupal [NAME] [COMMAND]        Run Drupal Console for a given instance."
   echo " drush [NAME] [COMMAND]         Run Drush for a given instance."
@@ -47,10 +48,10 @@ message_on_error() {
 export -f message_on_error
 
 if [ -f "$BASEPATH/scripts/$COMMAND.sh" ]; then
-  if [[ ! $COMMAND =~ ^list|proxy|prune|update|create$ ]]; then
+  if [[ ! $COMMAND =~ ^list|proxy|prune|update|create|create-lite$ ]]; then
     . "$BASEPATH/scripts/util/init.sh";
   fi
-  ORIGINAL_PWD=$ORIGINAL_PWD DDL=$BASEPATH/ddl.sh "$BASEPATH/scripts/$COMMAND.sh" "$@"
+  ORIGINAL_PWD=$ORIGINAL_PWD DDL_PATH=$BASEPATH DDL=$BASEPATH/ddl.sh "$BASEPATH/scripts/$COMMAND.sh" "$@"
 else
   echo "Command not recognized"
 fi

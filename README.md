@@ -31,6 +31,7 @@ Common operations have been abstracted into commands that can be run with
 drupal-docker-lite instance.
 
 - `create [DIR]` - Creates a new instance in a given directory.
+- `create-lite [DIR]` - Creates a new minimal instance in a given directory.
 - `customize` - Customizes instance to use local images for PHP and MySQL.
 - `drupal [NAME] [COMMAND]` - Run Drupal Console for a given instance.
 - `drush [NAME] [COMMAND]` - Run drush for a given instance.
